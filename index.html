@@ -2,161 +2,41 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invitación de Bautizo</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Invitación Bautizo</title>
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-html,body{
-width:100%;
-height:100%;
-overflow:hidden;
-background:#efe4d5;
-font-family:Georgia,serif;
-}
-
-#sobre{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:linear-gradient(#f5e8d6,#e3cba8);
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:100;
-cursor:pointer;
-transition:1.5s;
-}
-
-#sobre img{
-width:230px;
-animation:latido 2s infinite;
-filter:drop-shadow(0 10px 20px rgba(0,0,0,.25));
-}
-
-#sobre h2{
-margin-top:25px;
-font-weight:normal;
-color:#8c6b3c;
-text-align:center;
-padding:0 20px;
-}
-
-@keyframes latido{
-0%,100%{transform:scale(1);}
-50%{transform:scale(1.06);}
-}
-
-.oculto{
-opacity:0;
-visibility:hidden;
-}
-
-#contenido{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-opacity:0;
-transform:scale(.85);
-transition:2s;
-}
-
-#contenido.visible{
-opacity:1;
-transform:scale(1);
-}
-
-#contenido img{
-width:100%;
-height:100%;
-object-fit:contain;
-}
-
-.estrella{
-position:absolute;
-width:4px;
-height:4px;
-background:#fff7c5;
-border-radius:50%;
-animation:brillar 3s infinite;
-}
-
-@keyframes brillar{
-0%{opacity:0;transform:scale(.2);}
-50%{opacity:1;transform:scale(2);}
-100%{opacity:0;transform:scale(.2);}
-}
-
+html,body{margin:0;height:100%;overflow:hidden;background:#f4eee7;font-family:Arial}
+#scene{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+#envelope{position:absolute;width:min(90vw,700px);cursor:pointer;transition:transform .8s}
+#card{position:absolute;width:min(90vw,700px);transform:translateY(180px) scale(.85);opacity:0;transition:all 1.6s ease}
+#card img{width:100%;display:block;border-radius:18px;box-shadow:0 10px 35px rgba(0,0,0,.25)}
+.open #envelope{transform:translateY(220px) scale(.9);opacity:.15}
+.open #card{transform:translateY(0) scale(1);opacity:1;animation:zoom 14s ease-in-out infinite alternate}
+@keyframes zoom{from{transform:translateY(0) scale(1)}to{transform:translateY(0) scale(1.04)}}
+.p{position:absolute;top:-40px;font-size:22px;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(110vh) translateX(80px) rotate(360deg);opacity:.2}}
+#hint{position:absolute;top:18px;color:#8b6b3f;font-size:22px;text-align:center}
 </style>
 </head>
-
 <body>
-
-<div id="sobre" onclick="abrirInvitacion()">
-
-<img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
-
-<h2>Toca el sobre para abrir la invitación</h2>
-
+<div id="scene">
+<div id="hint">💌 Toca el sobre para abrir la invitación</div>
+<svg id="envelope" viewBox="0 0 800 520">
+<rect x="40" y="120" width="720" height="340" rx="10" fill="#ead9c2" stroke="#c9a66b" stroke-width="6"/>
+<polygon points="40,120 400,300 760,120" fill="#f5ead8" stroke="#c9a66b" stroke-width="6"/>
+</svg>
+<div id="card"><img src="invitacion.jpg" alt=""></div>
+<audio id="music" loop>
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
 </div>
-
-<div id="contenido">
-
-<img src="invitacion.png">
-
-</div>
-
 <script>
-
-function crearEstrellas(){
-
-for(let i=0;i<40;i++){
-
-let e=document.createElement("div");
-
-e.className="estrella";
-
-e.style.left=Math.random()*100+"%";
-
-e.style.top=Math.random()*100+"%";
-
-e.style.animationDelay=Math.random()*3+"s";
-
-document.body.appendChild(e);
-
+const s=document.getElementById('scene');
+for(let i=0;i<35;i++){let d=document.createElement('div');d.className='p';d.textContent='🌹';d.style.left=Math.random()*100+'vw';d.style.animationDuration=6+Math.random()*8+'s';d.style.animationDelay=Math.random()*8+'s';s.appendChild(d);}
+document.getElementById('envelope').onclick=()=>{
+document.body.classList.add('open');
+document.getElementById('hint').style.display='none';
+document.getElementById('music').play().catch(()=>{});
 }
-
-}
-
-crearEstrellas();
-
-function abrirInvitacion(){
-
-document.getElementById("sobre").classList.add("oculto");
-
-setTimeout(function(){
-
-document.getElementById("contenido").classList.add("visible");
-
-},700);
-
-}
-
 </script>
-
-</body>
-</html>
+</body></html>
