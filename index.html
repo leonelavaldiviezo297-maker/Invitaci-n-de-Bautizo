@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -12,157 +12,107 @@
     box-sizing:border-box;
 }
 
-body{
-    font-family: "Georgia", serif;
-    background:#f5eee6;
+html,body{
+    width:100%;
+    height:100%;
+    background:#f6f1eb;
+    overflow:hidden;
+    font-family:Arial,sans-serif;
+}
+
+#sobre{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#f8efe5,#dfc6a3);
     display:flex;
     justify-content:center;
     align-items:center;
-    min-height:100vh;
+    flex-direction:column;
+    z-index:10;
+    cursor:pointer;
+    transition:1.5s;
 }
 
-.invitacion{
-    width:90%;
-    max-width:400px;
-    background:#fffaf5;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,0.15);
-    text-align:center;
-    padding:25px;
+#sobre img{
+    width:280px;
+    max-width:85%;
+    filter:drop-shadow(0 10px 15px rgba(0,0,0,0.25));
+    animation:latido 2.5s infinite;
 }
 
-  .titulo{
-    color:#9b7653;
-    font-size:28px;
-    letter-spacing:2px;
-    margin-bottom:10px;
-}
-
-.nombre{
-    color:#8a6849;
-    font-size:32px;
-    font-weight:bold;
-    margin:15px 0;
-}
-
-.frase{
-    color:#6d5a4a;
-    font-size:16px;
-    line-height:1.6;
-    margin-bottom:20px;
-}
-
-.detalles{
-    color:#5c4b3d;
-    font-size:16px;
-    line-height:1.8;
-    margin-top:15px;
-}
-
-.detalles strong{
-    color:#9b7653;
-}
-
-.versiculo{
+#sobre p{
     margin-top:25px;
-    font-style:italic;
-    color:#7b6450;
-    font-size:15px;
-    line-height:1.5;
+    color:#8a6b3f;
+    font-size:22px;
+    font-family:"Georgia",serif;
+    letter-spacing:1px;
+    text-shadow:0 2px 5px rgba(0,0,0,0.15);
 }
 
-.flores{
-    font-size:35px;
-    color:#d8bfa8;
-    margin:10px 0;
+@keyframes latido{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.06);}
+    100%{transform:scale(1);}
 }
 
-.imagen{
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    object-fit:cover;
-    border:5px solid #ead8c6;
-    margin-bottom:15px;
+.ocultar{
+    opacity:0;
+    pointer-events:none;
 }
-  </style>
+
+#contenido{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transform:scale(.90);
+    transition:1.5s;
+}
+
+#contenido.mostrar{
+    opacity:1;
+    transform:scale(1);
+}
+
+#contenido img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+</style>
 </head>
 
 <body>
 
-<div class="invitacion">
-
-    <div class="flores">❀ ✿ ❀</div>
-
-    <h1 class="titulo">MI BAUTIZO</h1>
-
-    <img class="imagen" src="ivitacion.jpg" alt="Foto de mi bebé">
-
-    <h2 class="nombre">AMELIA KRISTIN<br>PIZARRO CASTILLO</h2>
-
-    <p class="frase">
-        Porque cada bendición merece ser compartida....<br><br>
-        Y con la bendición de Dios y con inmensa alegría,
-        tenemos el honor de invitarte a celebrar el Santo Bautizo
-        de nuestra querida hija. Tu presencia hará que esta noche
-        sea aún más especial.
-    </p>
-
-    <div class="detalles">
-
-        <p><strong>Sábado 18 de Julio de 2026</strong></p>
-
-        <p>
-            Ceremonia religiosa:<br>
-            Iglesia El Divino Niño
-        </p>
-
-        <p>
-            Recepción:<br>
-            Las Cabañas de César
-        </p>
-
-        <p>
-            Hora: 7:30 PM
-        </p>
-
-        <p>
-            Padres:<br>
-            Melissa Castillo<br>
-            Pedro Pizarro
-        </p>
-
-        <p>
-            Padrinos:<br>
-            Juliana Castillo<br>
-            Ronny Paez
-        </p>
-
-    </div>
-
-    <p class="versiculo">
-        "Dejad que los niños vengan a mí,
-        porque de ellos es el Reino de los Cielos."
-        <br>
-        Mateo 19:14
-    </p>
-
-    <div class="flores">❀ ✿ ❀</div>
-
+<div id="sobre" onclick="abrir()">
+    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
+    <p>Toca el sobre para abrir la invitación</p>
 </div>
+
+<div id="contenido">
+    <img src="invitacion.png">
+</div>
+
+<audio id="musica" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-memories.mp3" type="audio/mpeg">
+</audio>
+
 <script>
+function abrir(){
+    document.getElementById("sobre").classList.add("ocultar");
+    document.getElementById("contenido").classList.add("mostrar");
 
-const invitacion = document.querySelector(".invitacion");
-
-invitacion.addEventListener("click", function(){
-    invitacion.style.transform = "scale(1.03)";
-    
-    setTimeout(function(){
-        invitacion.style.transform = "scale(1)";
-    },300);
-});
-
+    let musica=document.getElementById("musica");
+    musica.play().catch(()=>{});
+}
 </script>
 
 </body>
