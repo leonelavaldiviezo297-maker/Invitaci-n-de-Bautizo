@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -17,17 +17,15 @@ html,body{
     height:100%;
     background:#f6f1eb;
     overflow:hidden;
-    font-family:Arial,sans-serif;
+    font-family:Georgia,serif;
 }
 
-/* SOBRE ELEGANTE */
+/* PANTALLA DEL SOBRE */
 #sobre{
     position:fixed;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
-    background:linear-gradient(135deg,#f8efe5,#dfc6a3);
+    background:linear-gradient(#f8efe5,#e4cfb0);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -37,59 +35,79 @@ html,body{
     transition:1.5s;
 }
 
-.sobre-elegante{
-    width:280px;
-    height:190px;
-    background:#fffaf2;
-    border-radius:10px;
+/* SOBRE */
+.sobre{
+    width:300px;
+    height:210px;
+    background:#fffaf1;
     position:relative;
-    box-shadow:0 15px 30px rgba(0,0,0,.25);
-    border:2px solid #d8b27c;
+    border-radius:8px;
+    border:3px solid #c9a15b;
+    box-shadow:0 20px 35px rgba(0,0,0,.25);
     overflow:hidden;
-    animation:latido 2.5s infinite;
+    animation:flotar 3s infinite;
 }
 
-.tapa{
+/* TRIANGULO SUPERIOR */
+.sobre:before{
+    content:"";
     position:absolute;
     top:0;
     left:0;
     width:0;
     height:0;
-    border-left:140px solid transparent;
-    border-right:140px solid transparent;
-    border-top:100px solid #ead1ad;
+    border-left:150px solid transparent;
+    border-right:150px solid transparent;
+    border-top:110px solid #ead4b3;
 }
 
+/* LINEAS DEL SOBRE */
+.sobre:after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:80px;
+    background:
+    linear-gradient(35deg,transparent 49%,#e2c89d 50%,transparent 51%),
+    linear-gradient(-35deg,transparent 49%,#e2c89d 50%,transparent 51%);
+}
+
+/* SELLO */
 .sello{
     position:absolute;
-    top:75px;
+    top:80px;
     left:50%;
     transform:translateX(-50%);
-    width:55px;
-    height:55px;
+    width:65px;
+    height:65px;
+    background:#b98a45;
     border-radius:50%;
-    background:#c9a15b;
     color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:28px;
-    box-shadow:0 4px 10px rgba(0,0,0,.2);
+    font-size:32px;
+    z-index:2;
+    box-shadow:0 5px 12px rgba(0,0,0,.3);
 }
 
+/* TEXTO */
 #sobre p{
-    margin-top:25px;
-    color:#8a6b3f;
+    margin-top:30px;
+    color:#80613b;
     font-size:22px;
-    font-family:"Georgia",serif;
-    letter-spacing:1px;
-    text-shadow:0 2px 5px rgba(0,0,0,.15);
+    text-align:center;
 }
 
-@keyframes latido{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.05);}
-    100%{transform:scale(1);}
+@keyframes flotar{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-8px);
+    }
 }
 
 .ocultar{
@@ -97,17 +115,16 @@ html,body{
     pointer-events:none;
 }
 
+/* INVITACION */
 #contenido{
     position:fixed;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
     display:flex;
     justify-content:center;
     align-items:center;
     opacity:0;
-    transform:scale(.90);
+    transform:scale(.9);
     transition:1.5s;
 }
 
@@ -129,8 +146,7 @@ html,body{
 
 <div id="sobre" onclick="abrir()">
 
-    <div class="sobre-elegante">
-        <div class="tapa"></div>
+    <div class="sobre">
         <div class="sello">✿</div>
     </div>
 
@@ -138,28 +154,27 @@ html,body{
 
 </div>
 
+
 <div id="contenido">
     <img src="invitacion.png">
 </div>
 
+
 <audio id="musica" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-memories.mp3" type="audio/mpeg">
+<source src="https://www.bensound.com/bensound-music/bensound-memories.mp3" type="audio/mpeg">
 </audio>
 
-<script>
 
+<script>
 function abrir(){
 
-    document.getElementById("sobre").classList.add("ocultar");
+document.getElementById("sobre").classList.add("ocultar");
 
-    document.getElementById("contenido").classList.add("mostrar");
+document.getElementById("contenido").classList.add("mostrar");
 
-    let musica=document.getElementById("musica");
-
-    musica.play().catch(()=>{});
+document.getElementById("musica").play().catch(()=>{});
 
 }
-
 </script>
 
 </body>
