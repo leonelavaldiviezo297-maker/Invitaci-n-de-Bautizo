@@ -20,6 +20,7 @@ html,body{
     font-family:Arial,sans-serif;
 }
 
+/* SOBRE ELEGANTE */
 #sobre{
     position:fixed;
     top:0;
@@ -36,11 +37,44 @@ html,body{
     transition:1.5s;
 }
 
-#sobre img{
+.sobre-elegante{
     width:280px;
-    max-width:85%;
-    filter:drop-shadow(0 10px 15px rgba(0,0,0,0.25));
+    height:190px;
+    background:#fffaf2;
+    border-radius:10px;
+    position:relative;
+    box-shadow:0 15px 30px rgba(0,0,0,.25);
+    border:2px solid #d8b27c;
+    overflow:hidden;
     animation:latido 2.5s infinite;
+}
+
+.tapa{
+    position:absolute;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:140px solid transparent;
+    border-right:140px solid transparent;
+    border-top:100px solid #ead1ad;
+}
+
+.sello{
+    position:absolute;
+    top:75px;
+    left:50%;
+    transform:translateX(-50%);
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#c9a15b;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
 
 #sobre p{
@@ -49,12 +83,12 @@ html,body{
     font-size:22px;
     font-family:"Georgia",serif;
     letter-spacing:1px;
-    text-shadow:0 2px 5px rgba(0,0,0,0.15);
+    text-shadow:0 2px 5px rgba(0,0,0,.15);
 }
 
 @keyframes latido{
     0%{transform:scale(1);}
-    50%{transform:scale(1.06);}
+    50%{transform:scale(1.05);}
     100%{transform:scale(1);}
 }
 
@@ -87,14 +121,21 @@ html,body{
     height:100%;
     object-fit:contain;
 }
+
 </style>
 </head>
 
 <body>
 
 <div id="sobre" onclick="abrir()">
-    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
+
+    <div class="sobre-elegante">
+        <div class="tapa"></div>
+        <div class="sello">✿</div>
+    </div>
+
     <p>Toca el sobre para abrir la invitación</p>
+
 </div>
 
 <div id="contenido">
@@ -106,13 +147,19 @@ html,body{
 </audio>
 
 <script>
+
 function abrir(){
+
     document.getElementById("sobre").classList.add("ocultar");
+
     document.getElementById("contenido").classList.add("mostrar");
 
     let musica=document.getElementById("musica");
+
     musica.play().catch(()=>{});
+
 }
+
 </script>
 
 </body>
