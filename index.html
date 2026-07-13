@@ -6,155 +6,162 @@
 <title>Invitación de Bautizo</title>
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html,body{
-width:100%;
-height:100%;
-overflow:hidden;
-background:#efe4d5;
-font-family:Georgia,serif;
+body{
+    font-family: "Georgia", serif;
+    background:#f5eee6;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
 }
 
-#sobre{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:linear-gradient(#f5e8d6,#e3cba8);
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:100;
-cursor:pointer;
-transition:1.5s;
+.invitacion{
+    width:90%;
+    max-width:400px;
+    background:#fffaf5;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+    text-align:center;
+    padding:25px;
 }
 
-#sobre img{
-width:230px;
-animation:latido 2s infinite;
-filter:drop-shadow(0 10px 20px rgba(0,0,0,.25));
+  .titulo{
+    color:#9b7653;
+    font-size:28px;
+    letter-spacing:2px;
+    margin-bottom:10px;
 }
 
-#sobre h2{
-margin-top:25px;
-font-weight:normal;
-color:#8c6b3c;
-text-align:center;
-padding:0 20px;
+.nombre{
+    color:#8a6849;
+    font-size:32px;
+    font-weight:bold;
+    margin:15px 0;
 }
 
-@keyframes latido{
-0%,100%{transform:scale(1);}
-50%{transform:scale(1.06);}
+.frase{
+    color:#6d5a4a;
+    font-size:16px;
+    line-height:1.6;
+    margin-bottom:20px;
 }
 
-.oculto{
-opacity:0;
-visibility:hidden;
+.detalles{
+    color:#5c4b3d;
+    font-size:16px;
+    line-height:1.8;
+    margin-top:15px;
 }
 
-#contenido{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-opacity:0;
-transform:scale(.85);
-transition:2s;
+.detalles strong{
+    color:#9b7653;
 }
 
-#contenido.visible{
-opacity:1;
-transform:scale(1);
+.versiculo{
+    margin-top:25px;
+    font-style:italic;
+    color:#7b6450;
+    font-size:15px;
+    line-height:1.5;
 }
 
-#contenido img{
-width:100%;
-height:100%;
-object-fit:contain;
+.flores{
+    font-size:35px;
+    color:#d8bfa8;
+    margin:10px 0;
 }
 
-.estrella{
-position:absolute;
-width:4px;
-height:4px;
-background:#fff7c5;
-border-radius:50%;
-animation:brillar 3s infinite;
+.imagen{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #ead8c6;
+    margin-bottom:15px;
 }
-
-@keyframes brillar{
-0%{opacity:0;transform:scale(.2);}
-50%{opacity:1;transform:scale(2);}
-100%{opacity:0;transform:scale(.2);}
-}
-
-</style>
+  </style>
 </head>
 
 <body>
 
-<div id="sobre" onclick="abrirInvitacion()">
+<div class="invitacion">
 
-<img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
+    <div class="flores">❀ ✿ ❀</div>
 
-<h2>Toca el sobre para abrir la invitación</h2>
+    <h1 class="titulo">MI BAUTIZO</h1>
+
+    <img class="imagen" src="ivitacion.jpg" alt="Foto de mi bebé">
+
+    <h2 class="nombre">AMELIA KRISTIN<br>PIZARRO CASTILLO</h2>
+
+    <p class="frase">
+        Porque cada bendición merece ser compartida....<br><br>
+        Y con la bendición de Dios y con inmensa alegría,
+        tenemos el honor de invitarte a celebrar el Santo Bautizo
+        de nuestra querida hija. Tu presencia hará que esta noche
+        sea aún más especial.
+    </p>
+
+    <div class="detalles">
+
+        <p><strong>Sábado 18 de Julio de 2026</strong></p>
+
+        <p>
+            Ceremonia religiosa:<br>
+            Iglesia El Divino Niño
+        </p>
+
+        <p>
+            Recepción:<br>
+            Las Cabañas de César
+        </p>
+
+        <p>
+            Hora: 7:30 PM
+        </p>
+
+        <p>
+            Padres:<br>
+            Melissa Castillo<br>
+            Pedro Pizarro
+        </p>
+
+        <p>
+            Padrinos:<br>
+            Juliana Castillo<br>
+            Ronny Paez
+        </p>
+
+    </div>
+
+    <p class="versiculo">
+        "Dejad que los niños vengan a mí,
+        porque de ellos es el Reino de los Cielos."
+        <br>
+        Mateo 19:14
+    </p>
+
+    <div class="flores">❀ ✿ ❀</div>
 
 </div>
-
-<div id="contenido">
-
-<img src="invitacion.png">
-
-</div>
-
 <script>
 
-function crearEstrellas(){
+const invitacion = document.querySelector(".invitacion");
 
-for(let i=0;i<40;i++){
-
-let e=document.createElement("div");
-
-e.className="estrella";
-
-e.style.left=Math.random()*100+"%";
-
-e.style.top=Math.random()*100+"%";
-
-e.style.animationDelay=Math.random()*3+"s";
-
-document.body.appendChild(e);
-
-}
-
-}
-
-crearEstrellas();
-
-function abrirInvitacion(){
-
-document.getElementById("sobre").classList.add("oculto");
-
-setTimeout(function(){
-
-document.getElementById("contenido").classList.add("visible");
-
-},700);
-
-}
+invitacion.addEventListener("click", function(){
+    invitacion.style.transform = "scale(1.03)";
+    
+    setTimeout(function(){
+        invitacion.style.transform = "scale(1)";
+    },300);
+});
 
 </script>
 
