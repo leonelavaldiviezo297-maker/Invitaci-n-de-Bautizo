@@ -2,150 +2,159 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Invitación Bautizo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación de Bautizo</title>
 
 <style>
-html,body{
+
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html,body{
+width:100%;
 height:100%;
 overflow:hidden;
-background:#f5efe7;
+background:#efe4d5;
 font-family:Georgia,serif;
 }
 
 #sobre{
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-width:300px;
-height:180px;
-z-index:3;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(#f5e8d6,#e3cba8);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:100;
+cursor:pointer;
 transition:1.5s;
 }
 
-.base{
-position:absolute;
-bottom:0;
-width:100%;
-height:95px;
-background:#efe1cb;
-border:2px solid #cfb487;
+#sobre img{
+width:230px;
+animation:latido 2s infinite;
+filter:drop-shadow(0 10px 20px rgba(0,0,0,.25));
 }
 
-.triangulo{
-position:absolute;
-width:0;
-height:0;
-border-left:150px solid transparent;
-border-right:150px solid transparent;
-border-top:90px solid #faf4ea;
+#sobre h2{
+margin-top:25px;
+font-weight:normal;
+color:#8c6b3c;
+text-align:center;
+padding:0 20px;
 }
 
-#card{
-position:absolute;
-left:50%;
-top:55%;
-transform:translate(-50%,80px);
-width:88%;
-max-width:420px;
+@keyframes latido{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.06);}
+}
+
+.oculto{
 opacity:0;
+visibility:hidden;
+}
+
+#contenido{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+transform:scale(.85);
 transition:2s;
 }
 
-#card img{
+#contenido.visible{
+opacity:1;
+transform:scale(1);
+}
+
+#contenido img{
 width:100%;
-display:block;
-border-radius:18px;
-box-shadow:0 10px 35px rgba(0,0,0,.25);
-animation:zoom 8s infinite alternate;
+height:100%;
+object-fit:contain;
 }
 
-@keyframes zoom{
-from{transform:scale(1);}
-to{transform:scale(1.03);}
-}
-
-.visible{
-opacity:1!important;
-transform:translate(-50%,-40px)!important;
-}
-
-.spark{
+.estrella{
 position:absolute;
 width:4px;
 height:4px;
-background:#f9dc73;
+background:#fff7c5;
 border-radius:50%;
-animation:shine 3s infinite;
+animation:brillar 3s infinite;
 }
 
-@keyframes shine{
-0%{opacity:0;transform:scale(.5);}
+@keyframes brillar{
+0%{opacity:0;transform:scale(.2);}
 50%{opacity:1;transform:scale(2);}
-100%{opacity:0;transform:scale(.5);}
+100%{opacity:0;transform:scale(.2);}
 }
 
-#texto{
-position:absolute;
-top:20px;
-width:100%;
-text-align:center;
-color:#8a6d3b;
-font-size:24px;
-opacity:0;
-transition:2s;
-}
-
-.mostrar{
-opacity:1!important;
-}
 </style>
 </head>
 
 <body>
 
-<div id="texto">
-Bienvenidos al Bautizo de Amelia Kristin
+<div id="sobre" onclick="abrirInvitacion()">
+
+<img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
+
+<h2>Toca el sobre para abrir la invitación</h2>
+
 </div>
 
-<div id="sobre">
-<div class="triangulo"></div>
-<div class="base"></div>
-</div>
+<div id="contenido">
 
-<div id="card">
-<img src="invitacion.jpg">
+<img src="invitacion.png">
+
 </div>
 
 <script>
 
-for(var i=0;i<25;i++){
+function crearEstrellas(){
 
-var s=document.createElement("div");
+for(let i=0;i<40;i++){
 
-s.className="spark";
+let e=document.createElement("div");
 
-s.style.left=Math.random()*100+"vw";
+e.className="estrella";
 
-s.style.top=Math.random()*100+"vh";
+e.style.left=Math.random()*100+"%";
 
-s.style.animationDelay=Math.random()*3+"s";
+e.style.top=Math.random()*100+"%";
 
-document.body.appendChild(s);
+e.style.animationDelay=Math.random()*3+"s";
+
+document.body.appendChild(e);
 
 }
 
+}
+
+crearEstrellas();
+
+function abrirInvitacion(){
+
+document.getElementById("sobre").classList.add("oculto");
+
 setTimeout(function(){
 
-document.getElementById("sobre").style.opacity="0";
+document.getElementById("contenido").classList.add("visible");
 
-document.getElementById("card").className="visible";
+},700);
 
-document.getElementById("texto").className="mostrar";
-
-},1800);
+}
 
 </script>
 
