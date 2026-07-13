@@ -6,109 +6,156 @@
 <title>Invitación de Bautizo</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 html,body{
-    width:100%;
-    height:100%;
-    background:#f6f1eb;
-    overflow:hidden;
-    font-family:Arial,sans-serif;
+width:100%;
+height:100%;
+overflow:hidden;
+background:#efe4d5;
+font-family:Georgia,serif;
 }
 
 #sobre{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:#e8d5bc;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:10;
-    cursor:pointer;
-    transition:1.5s;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(#f5e8d6,#e3cba8);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:100;
+cursor:pointer;
+transition:1.5s;
 }
 
 #sobre img{
-    width:260px;
-    max-width:80%;
-    animation:latido 2s infinite;
+width:230px;
+animation:latido 2s infinite;
+filter:drop-shadow(0 10px 20px rgba(0,0,0,.25));
 }
 
-#sobre p{
-    margin-top:20px;
-    color:#8a6b3f;
-    font-size:22px;
+#sobre h2{
+margin-top:25px;
+font-weight:normal;
+color:#8c6b3c;
+text-align:center;
+padding:0 20px;
 }
 
 @keyframes latido{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.05);}
-    100%{transform:scale(1);}
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.06);}
 }
 
-.ocultar{
-    opacity:0;
-    pointer-events:none;
+.oculto{
+opacity:0;
+visibility:hidden;
 }
 
 #contenido{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    opacity:0;
-    transform:scale(.90);
-    transition:1.5s;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+transform:scale(.85);
+transition:2s;
 }
 
-#contenido.mostrar{
-    opacity:1;
-    transform:scale(1);
+#contenido.visible{
+opacity:1;
+transform:scale(1);
 }
 
 #contenido img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
+width:100%;
+height:100%;
+object-fit:contain;
 }
+
+.estrella{
+position:absolute;
+width:4px;
+height:4px;
+background:#fff7c5;
+border-radius:50%;
+animation:brillar 3s infinite;
+}
+
+@keyframes brillar{
+0%{opacity:0;transform:scale(.2);}
+50%{opacity:1;transform:scale(2);}
+100%{opacity:0;transform:scale(.2);}
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="sobre" onclick="abrir()">
-    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
-    <p>Toca el sobre para abrir la invitación</p>
+<div id="sobre" onclick="abrirInvitacion()">
+
+<img src="https://cdn-icons-png.flaticon.com/512/561/561127.png">
+
+<h2>Toca el sobre para abrir la invitación</h2>
+
 </div>
 
 <div id="contenido">
-    <img src="invitacion.png">
+
+<img src="invitacion.png">
+
 </div>
 
-<audio id="musica" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-memories.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-function abrir(){
-    document.getElementById("sobre").classList.add("ocultar");
-    document.getElementById("contenido").classList.add("mostrar");
 
-    let musica=document.getElementById("musica");
-    musica.play().catch(()=>{});
+function crearEstrellas(){
+
+for(let i=0;i<40;i++){
+
+let e=document.createElement("div");
+
+e.className="estrella";
+
+e.style.left=Math.random()*100+"%";
+
+e.style.top=Math.random()*100+"%";
+
+e.style.animationDelay=Math.random()*3+"s";
+
+document.body.appendChild(e);
+
 }
+
+}
+
+crearEstrellas();
+
+function abrirInvitacion(){
+
+document.getElementById("sobre").classList.add("oculto");
+
+setTimeout(function(){
+
+document.getElementById("contenido").classList.add("visible");
+
+},700);
+
+}
+
 </script>
 
 </body>
