@@ -2,41 +2,183 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Invitación Bautizo</title>
+
 <style>
-html,body{margin:0;height:100%;overflow:hidden;background:#f4eee7;font-family:Arial}
-#scene{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-#envelope{position:absolute;width:min(90vw,700px);cursor:pointer;transition:transform .8s}
-#card{position:absolute;width:min(90vw,700px);transform:translateY(180px) scale(.85);opacity:0;transition:all 1.6s ease}
-#card img{width:100%;display:block;border-radius:18px;box-shadow:0 10px 35px rgba(0,0,0,.25)}
-.open #envelope{transform:translateY(220px) scale(.9);opacity:.15}
-.open #card{transform:translateY(0) scale(1);opacity:1;animation:zoom 14s ease-in-out infinite alternate}
-@keyframes zoom{from{transform:translateY(0) scale(1)}to{transform:translateY(0) scale(1.04)}}
-.p{position:absolute;top:-40px;font-size:22px;animation:fall linear infinite}
-@keyframes fall{to{transform:translateY(110vh) translateX(80px) rotate(360deg);opacity:.2}}
-#hint{position:absolute;top:18px;color:#8b6b3f;font-size:22px;text-align:center}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:linear-gradient(#f7f3ed,#eadfcf);
+overflow:hidden;
+font-family:Georgia,serif;
+}
+
+#sobre{
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+width:320px;
+height:210px;
+transition:1.6s;
+z-index:20;
+}
+
+.base{
+position:absolute;
+bottom:0;
+width:100%;
+height:120px;
+background:#efe4d3;
+border:2px solid #d6b887;
+border-radius:0 0 12px 12px;
+box-shadow:0 15px 30px rgba(0,0,0,.18);
+}
+
+.tapa{
+position:absolute;
+width:100%;
+height:120px;
+background:#f8f1e7;
+clip-path:polygon(0 100%,50% 0,100% 100%);
+border:2px solid #d6b887;
+transform-origin:top;
+animation:abrir 2s forwards;
+}
+
+@keyframes abrir{
+
+0%{
+transform:rotateX(0deg);
+}
+
+100%{
+transform:rotateX(180deg);
+}
+
+}
+
+#invitacion{
+
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,80px) scale(.9);
+opacity:0;
+width:90vw;
+max-width:420px;
+transition:2s;
+z-index:10;
+
+}
+
+#invitacion img{
+
+width:100%;
+display:block;
+border-radius:18px;
+box-shadow:0 18px 45px rgba(0,0,0,.25);
+
+animation:zoom 10s infinite alternate;
+
+}
+
+@keyframes zoom{
+
+from{transform:scale(1);}
+to{transform:scale(1.03);}
+
+}
+
+.visible{
+
+opacity:1!important;
+transform:translate(-50%,-20px) scale(1)!important;
+
+}
+
+.brillo{
+
+position:absolute;
+width:4px;
+height:4px;
+background:#ffe69a;
+border-radius:50%;
+animation:destello 3s linear infinite;
+
+}
+
+@keyframes destello{
+
+0%{
+opacity:0;
+transform:scale(.2);
+}
+
+50%{
+opacity:1;
+transform:scale(2);
+}
+
+100%{
+opacity:0;
+transform:scale(.2);
+}
+
+}
+
 </style>
 </head>
+
 <body>
-<div id="scene">
-<div id="hint">💌 Toca el sobre para abrir la invitación</div>
-<svg id="envelope" viewBox="0 0 800 520">
-<rect x="40" y="120" width="720" height="340" rx="10" fill="#ead9c2" stroke="#c9a66b" stroke-width="6"/>
-<polygon points="40,120 400,300 760,120" fill="#f5ead8" stroke="#c9a66b" stroke-width="6"/>
-</svg>
-<div id="card"><img src="invitacion.jpg" alt=""></div>
-<audio id="music" loop>
-<source src="musica.mp3" type="audio/mpeg">
-</audio>
+
+<div id="sobre">
+
+<div class="tapa"></div>
+
+<div class="base"></div>
+
 </div>
+
+<div id="invitacion">
+
+<img src="invitacion.jpg">
+
+</div>
+
 <script>
-const s=document.getElementById('scene');
-for(let i=0;i<35;i++){let d=document.createElement('div');d.className='p';d.textContent='🌹';d.style.left=Math.random()*100+'vw';d.style.animationDuration=6+Math.random()*8+'s';d.style.animationDelay=Math.random()*8+'s';s.appendChild(d);}
-document.getElementById('envelope').onclick=()=>{
-document.body.classList.add('open');
-document.getElementById('hint').style.display='none';
-document.getElementById('music').play().catch(()=>{});
+
+setTimeout(()=>{
+
+document.getElementById("invitacion").classList.add("visible");
+
+document.getElementById("sobre").style.opacity="0";
+
+},1700);
+
+for(let i=0;i<30;i++){
+
+let b=document.createElement("div");
+
+b.className="brillo";
+
+b.style.left=Math.random()*100+"vw";
+
+b.style.top=Math.random()*100+"vh";
+
+b.style.animationDelay=Math.random()*3+"s";
+
+document.body.appendChild(b);
+
 }
+
 </script>
-</body></html>
+
+</body>
+</html>
